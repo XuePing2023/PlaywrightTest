@@ -19,7 +19,8 @@ test.describe('app shell', () => {
   test('links to the Vite docs in a new tab', async ({ page }) => {
     await page.goto('/')
 
-    const viteLink = page.getByRole('link', { name: 'Vite', exact: true })
+    /* `TheWelcome.vue` renders a second "Vite" link inside <main>, so scope to the header. */
+    const viteLink = page.locator('header').getByRole('link', { name: 'Vite', exact: true })
     await expect(viteLink).toHaveAttribute('href', 'https://vite.dev/')
     await expect(viteLink).toHaveAttribute('target', '_blank')
     await expect(viteLink).toHaveAttribute('rel', 'noopener')
