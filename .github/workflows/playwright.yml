@@ -51,6 +51,16 @@ jobs:
           retention-days: 30
           if-no-files-found: ignore
 
+      # Flat, readable PNGs — one per test step — for quick offline review.
+      - name: Upload step screenshots
+        uses: actions/upload-artifact@v5
+        if: ${{ !cancelled() }}
+        with:
+          name: step-screenshots
+          path: test-results/**/*.png
+          retention-days: 14
+          if-no-files-found: ignore
+
       # Raw traces, screenshots and videos, which the report may only link to.
       - name: Upload Playwright test results
         uses: actions/upload-artifact@v5
